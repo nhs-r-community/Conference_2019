@@ -36,9 +36,10 @@ Please submit your content to this repository using a pull request.  If you are 
 1. Create a folder with your workshop name and add material to it.
 1. 'Commit' your workshop material to the repository.
 1. 'Push' your changes to GitHub.
-1. Come back to this repository and create a 'pull' request (a request to merge the material in you 'fork' in).
+1. Come back to your fork on GitHub and create a 'pull' request (a request to merge the material in you 'fork' in). <img src='man/figures/pull.png' align="right" height="120" />
 1. Follow the instructions and add a description of what you adding
 
+One of the organisasing committee will review it and merge it into the master.  It will then be avaialble in the sessions.
 
 __Please include:__
 

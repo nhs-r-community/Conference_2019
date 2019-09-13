@@ -43,9 +43,13 @@ organising committee for help, or follow these steps:
 6.  Create a folder with your workshop name and add material to it.
 7.  ‘Commit’ your workshop material to the repository.
 8.  ‘Push’ your changes to GitHub.
-9.  Come back to this repository and create a ‘pull’ request (a request
-    to merge the material in you ‘fork’ in).
+9.  Come back to your fork on GitHub and create a ‘pull’ request (a
+    request to merge the material in you ‘fork’ in).
+    <img src='man/figures/pull.png' align="right" height="120" />
 10. Follow the instructions and add a description of what you adding
+
+One of the organisasing committee will review it and merge it into the
+master. It will then be avaialble in the sessions.
 
 **Please include:**
 
