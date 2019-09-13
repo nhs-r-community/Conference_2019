@@ -21,7 +21,7 @@ To download and reuse this material, please use these steps:
   
 This will download all the session to you machine in an RStudio Project.
 
-_Alternatively, you copy the code of the files you are interested in without having to use Git._
+_Alternatively, you can copy the code of the files you are interested in without having to use Git._
 
 
 ## For workshop leaders:

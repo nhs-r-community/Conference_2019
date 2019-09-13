@@ -23,7 +23,7 @@ To download and reuse this material, please use these steps:
 
 This will download all the session to you machine in an RStudio Project.
 
-*Alternatively, you copy the code of the files you are interested in
+*Alternatively, you can copy the code of the files you are interested in
 without having to use Git.*
 
 ## For workshop leaders:
