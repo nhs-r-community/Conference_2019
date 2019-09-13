@@ -10,7 +10,7 @@ Community conference, 4th & 5th November 2019.
 
 To download and reuse this material, please use these steps:
 
-1.  Download Git for you system: <https://git-scm.com/downloads>
+1.  Download Git for your system: <https://git-scm.com/downloads>
 2.  Get familiar with how to use Git. Jenny Bryan’s ‘Happy Git with R’
     is a good place to start: <https://happygitwithr.com/>
 3.  Register for a GitHub account.
@@ -32,7 +32,7 @@ Please submit your content to this repository using a pull request. If
 you are not familiar with Git and GitHub, please contact the conference
 organising committee for help, or follow these steps:
 
-1.  Download Git for you system: <https://git-scm.com/downloads>
+1.  Download Git for your system: <https://git-scm.com/downloads>
 2.  Get familiar with how to use Git. Jenny Bryan’s ‘Happy Git with R’
     is a good place to start: <https://happygitwithr.com/>
 3.  Register for a GitHub account.
@@ -49,12 +49,12 @@ organising committee for help, or follow these steps:
 10. Follow the instructions and add a description of what you adding
 
 One of the organising committee will review it and merge it into the
-master. It will then be avaialble in the sessions.
+master. It will then be available in the sessions.
 
 **Please include:**
 
 1.  A folder with the name of your session
-2.  A README.md file in you folder, this will create the landing page,
+2.  A README.md file in your folder, this will create the landing page,
     like the one you are reading now.
 
 We may rearrange your repository files or folders for consistency across
