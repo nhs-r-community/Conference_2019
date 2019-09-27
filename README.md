@@ -1,67 +1,76 @@
 
 # NHS-R Community Conference Workshops 2019 <a href='https://nhsrcommunity.com/'><img src='man/figures/logo.png' align="right" height="80" /></a>
 
-This repository holds the content for the workshop session for the NHS-R
-Community conference, 4th & 5th November 2019.
+This repository holds the content for the NHS-R Community conference,
+4th & 5th November 2019.
+
+Plenary session and lightning talk material will be shared in the
+relevant folders, and workshop details are below.
 
 <br>
 
-## For workshop attendees:
+-----
 
-To download and reuse this material, please use these steps:
+# Workshops
 
-1.  Download Git for your system: <https://git-scm.com/downloads>
-2.  Get familiar with how to use Git. Jenny Bryan’s ‘Happy Git with R’
-    is a good place to start: <https://happygitwithr.com/>
-3.  Register for a GitHub account.
-4.  Clone this repository, using this link:
-    <https://github.com/nhs-r-community/Conference_Workshops_2019.git>
-      - You can do this with in terminal with the command: `git clone
-        https://github.com/nhs-r-community/Conference_Workshops_2019.git`
-      - By creating a New Project in RStudio, selection ‘Version
-        Control’, add the link into the URL box.
+The conference programme includes several workshop session. Please make
+sure you are aware of the session you are attending and have the
+considered how you will access the material (see below). Workshops will
+begin promptly and presenters will assume you can access the relevant
+material.
 
-This will download all the session to you machine in an RStudio Project.
+## Workshop sessions
 
-*Alternatively, you can copy the code of the files you are interested in
-without having to use Git.*
+| Name                         |  Presenter   |                                                                           Link |
+| ---------------------------- | :----------: | -----------------------------------------------------------------------------: |
+| Explainable Machine Learning | Hannah Frick | [GitHub](https://github.com/MangoTheCat/explainable-machine-learning-workshop) |
+| Regression Modelling in R    | Chris Mainey |         [GitHub](https://github.com/chrismainey/Regression_Modelling_NHSR2019) |
 
-## For workshop leaders:
+<br><br>
 
-Please submit your content to this repository using a pull request. If
-you are not familiar with Git and GitHub, please contact the conference
-organising committee for help, or follow these steps:
+### For workshop attendees:
 
-1.  Download Git for your system: <https://git-scm.com/downloads>
-2.  Get familiar with how to use Git. Jenny Bryan’s ‘Happy Git with R’
-    is a good place to start: <https://happygitwithr.com/>
-3.  Register for a GitHub account.
-4.  Go to the top of this page and click ‘Fork’. This creates your own
-    copy of this repository.
-    <img src='man/figures/fork.PNG' align="right" height="60" />
-5.  ‘Pull’ it down to your machine.
-6.  Create a folder with your workshop name and add material to it.
-7.  ‘Commit’ your workshop material to the repository.
-8.  ‘Push’ your changes to GitHub.
-9.  Come back to your fork on GitHub and create a ‘pull’ request (a
-    request to merge the material in you ‘fork’ in).
-    <img src='man/figures/pull.PNG' align="right" height="120" />
-10. Follow the instructions and add a description of what you adding
+There are two ways to access the workshops: + Using your own machine:
+You can download zip files of each workshop, or if you are familiar with
+Git and GitHub, you can clone the repository. + Using the RStudio Cloud
+Workspace: All material is available in the ***\[link to follow\]***.
+Please email ***\[email to follow\]***, prior to the conferece to
+request access.
 
-One of the organising committee will review it and merge it into the
-master. It will then be available in the sessions.
-
-**Please include:**
-
-1.  A folder with the name of your session
-2.  A README.md file in your folder, this will create the landing page,
-    like the one you are reading now.
-
-We may rearrange your repository files or folders for consistency across
-workshops, and will update your material as required for this.
+If you are unsure about your setup, or unable to access the material on
+your own machine, please use the RStudio Cloud method.
 
 <br>
 
-**Please note that the ‘Conference\_Workshops\_2019’ project is released
-with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By
-contributing to this project, you agree to abide by its terms.**
+**To download and use this material on you machine, please use these
+steps:**
+
+1.  Make sure you have `R` and RStudio installed.
+    <img src='man/figures/dwn_clone.PNG' align="right" height="200" />
+
+2.  Identify the sessions you are attending from the list above, and
+    follow the link to the relevant repository
+
+3.  Click the ‘Clone or Download’ button and select ‘Download zip file’:
+
+4.  Once the file has downloaded, unzip it, and open the ‘.Rproj’ file
+
+<br><br>
+
+### For workshop leaders:
+
+Please commit you workshop material to a GitHub repository by
+30/10/2019. This will allow us time to make sure your material is
+available on RStudio cloud. Please email a link to your repository, and
+a list of the required `R` packages, to ***\[email to follow\]*** .
+
+If you are using healthcare related datasets as examples, please
+consider adding them to the `NHSRdatasets` package. The data can then be
+reused by other to learn `R` or when running training. You can fine the
+package at: <https://github.com/nhs-r-community/NHSRdatasets>
+
+<br>
+
+**Please note that the ‘Conference\_2019’ project is released with a
+[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to
+this project, you agree to abide by its terms.**
