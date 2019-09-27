@@ -34,7 +34,7 @@ There are two ways to access the workshops: + Using your own machine:
 You can download zip files of each workshop, or if you are familiar with
 Git and GitHub, you can clone the repository. + Using the RStudio Cloud
 Workspace: All material is available in the ***\[link to follow\]***.
-Please email ***\[email to follow\]***, prior to the conferece to
+Please email ***\[email to follow\]***, prior to the conference to
 request access.
 
 If you are unsure about your setup, or unable to access the material on
