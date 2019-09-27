@@ -48,7 +48,7 @@ your own machine, please use the RStudio Cloud method.
 steps:**
 
 1.  Make sure you have `R` and RStudio installed.
-    <img src='man/figures/dwn_clone.PNG' align="right" height="200" />
+    <img src='man/figures/dwn_clone.png' align="right" height="200" />
 
 2.  Identify the sessions you are attending from the list above, and
     follow the link to the relevant repository

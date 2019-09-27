@@ -40,7 +40,7 @@ If you are unsure about your setup, or unable to access the material on your own
 __To download and use this material on you machine, please use these steps:__
 
 1. Make sure you have `R` and RStudio installed.
-<img src='man/figures/dwn_clone.PNG' align="right" height="200" />
+<img src='man/figures/dwn_clone.png' align="right" height="200" />
 1. Identify the sessions you are attending from the list above, and follow the link to the relevant repository
 1. Click the 'Clone or Download' button and select 'Download zip file':
 
