@@ -51,11 +51,11 @@ steps:**
     <img src='man/figures/dwn_clone.png' align="right" height="200" />
 
 2.  Identify the sessions you are attending from the list above, and
-    follow the link to the relevant repository
+    follow the link to the relevant repository.
 
 3.  Click the ‘Clone or Download’ button and select ‘Download zip file’:
 
-4.  Once the file has downloaded, unzip it, and open the ‘.Rproj’ file
+4.  Once the file has downloaded, unzip it, and open the ‘.Rproj’ file.
 
 <br><br>
 
@@ -64,7 +64,7 @@ steps:**
 Please commit you workshop material to a GitHub repository by
 30/10/2019. This will allow us time to make sure your material is
 available on RStudio cloud. Please email a link to your repository, and
-a list of the required `R` packages, to ***\[email to follow\]*** .
+a list of the required `R` packages, to <nhsrconfspeakers@gmail.com>.
 
 If you are using healthcare related datasets as examples, please
 consider adding them to the `NHSRdatasets` package. The data can then be
