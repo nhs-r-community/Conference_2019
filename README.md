@@ -36,8 +36,9 @@ There are two ways to access the workshops:
     or if you are familiar with Git and GitHub, you can clone the
     repository.
   - Using the RStudio Cloud Workspace: All material is available in the
-    ***\[link to follow\]***. Please email ***\[email to follow\]***,
-    prior to the conference to request access.
+    conference workspace. We will send a link to the workspace, via the
+    registered email address of attendees, in the week prior to the
+    conference.
 
 If you are unsure about your setup, or unable to access the material on
 your own machine, please use the RStudio Cloud method.
@@ -64,11 +65,12 @@ steps:**
 Please commit you workshop material to a GitHub repository by
 30/10/2019. This will allow us time to make sure your material is
 available on RStudio cloud. Please email a link to your repository, and
-a list of the required `R` packages, to <nhsrconfspeakers@gmail.com>.
+a list of the required `R` packages, to
+[nhsrconfspeakers@gmail.com](mailto:nhsrconfspeakers@gmail).
 
 If you are using healthcare related datasets as examples, please
 consider adding them to the `NHSRdatasets` package. The data can then be
-reused by other to learn `R` or when running training. You can fine the
+reused by other to learn `R` or when running training. You can find the
 package at: <https://github.com/nhs-r-community/NHSRdatasets>
 
 <br>
