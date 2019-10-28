@@ -32,13 +32,15 @@ material.
 
 There are two ways to access the workshops:
 
+  - Using the RStudio Cloud Workspace **(OUr prefered option)**: All
+    material is available in the conference workspace:
+    <https://bit.ly/2Nnblc2> . This works from your web browser, and you
+    do not need R and Rstudio installd on your machine to access it.
+
   - Using your own machine: You can download zip files of each workshop,
     or if you are familiar with Git and GitHub, you can clone the
-    repository.
-  - Using the RStudio Cloud Workspace: All material is available in the
-    conference workspace. We will send a link to the workspace, via the
-    registered email address of attendees, in the week prior to the
-    conference.
+    repository. Follow the links in the table above to the relevant
+    workshops.
 
 If you are unsure about your setup, or unable to access the material on
 your own machine, please use the RStudio Cloud method.
