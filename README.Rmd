@@ -19,9 +19,11 @@ The conference programme includes several workshop session.  Please make sure yo
 ## Workshop sessions
 
 
-| Name                        | Presenter     | Link  |
-|-----------------------------|:-------------:|------:|
-| Explainable Machine Learning| Hannah Frick  |[GitHub](https://github.com/MangoTheCat/explainable-machine-learning-workshop)|
+| Name                           | Presenter     | Link  |
+|--------------------------------|:-------------:|------:|
+| Explainable Machine Learning   | Hannah Frick  |[GitHub](https://github.com/MangoTheCat/explainable-machine-learning-workshop)|
+| Introduction to data wrangling | Emma Vestesson |[GitHub](https://github.com/THF-evaluative-analytics/NHSR-introduction-to-data-wrangling)
+| R for Excel Users           | Sean Manzi    |[GitLab](https://gitlab.com/SManzi/r-for-excel-users-workshop)
 | Regression Modelling in R   | Chris Mainey  |[GitHub](https://github.com/chrismainey/Regression_Modelling_NHSR2019) |
 
 <br><br>
