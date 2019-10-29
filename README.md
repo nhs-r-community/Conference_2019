@@ -27,7 +27,7 @@ material.
 | -------- | :--------------------------------------------------------------------------------- | :----------: | -----------------------------------------------------------------------------: |
 | 1        | R for Novices                                                                      |              |                                                                                |
 | 2        | R for Excel Users                                                                  |  Sean Manzi  |                 [GitLab](https://gitlab.com/SManzi/r-for-excel-users-workshop) |
-| 3        | Simulation modelling of patient flow using routinely collected data, with r-simmer |  Tom Lawton  |                                                                                |
+| 3        | Simulation modelling of patient flow using routinely collected data, with r-simmer |  Tom Lawton  |                                 [GitHub](https://github.com/thigger/ICU-Model) |
 | 4        | Natural Language Processing (NLP) with R                                           | Steph Locke  |                                                                                |
 | 5        | Explainable Machine Learning                                                       | Hannah Frick | [GitHub](https://github.com/MangoTheCat/explainable-machine-learning-workshop) |
 | 6        | Introduction to ggplot2                                                            | Rhian Davis  |                                                                                |
