@@ -23,10 +23,10 @@ The conference programme includes several workshop session.  Please make sure yo
 |Workshop| Name                           | Presenter     | Link  |
 |--|:-------------------------------|:-------------:|------:|
 |1| R for Novices           |     |  |
-|2| R for Excel Users           | Sean Manzi    |[GitLab](https://gitlab.com/SManzi/r-for-excel-users-workshop)
+|2| R for Excel Users           | Sean Manzi    | [GitLab](https://gitlab.com/SManzi/r-for-excel-users-workshop)
 |3| Simulation modelling of patient flow using routinely collected data, with r-simmer| Tom Lawton | |
 |4| Natural Language Processing (NLP) with R| Steph Locke| |
-|5| Explainable Machine Learning   | Hannah Frick  |[GitHub](https://github.com/MangoTheCat/explainable-machine-learning-workshop)|
+|5| Explainable Machine Learning   | Hannah Frick| [GitHub](https://github.com/MangoTheCat/explainable-machine-learning-workshop)|
 |6| Introduction to ggplot2| Rhian Davis| |
 
 
@@ -35,9 +35,9 @@ The conference programme includes several workshop session.  Please make sure yo
 |--|:-------------------------------|:-------------:|------:|
 |7| Introduction to R Markdown      | David Whiting  |  |
 |8| A worked introduction to Population Segmentation and PHM analytics | Adrian Pratt & Richard Wood | |
-|9| Introduction to functional programming | Thomas Jemmet & Andrew Jones | |
-|10| Introduction to data wrangling | Emma Vestesson |[GitHub](https://github.com/THF-evaluative-analytics/NHSR-introduction-to-data-wrangling)
-|11| Regression Modelling in R   | Chris Mainey  |[GitHub](https://github.com/chrismainey/Regression_Modelling_NHSR2019)
+|9| Introduction to functional programming | Thomas Jemmet & Andrew Jones | [GitHub](https://github.com/tomjemmett/Functional_Programming_Workshop)|
+|10| Introduction to data wrangling | Emma Vestesson| [GitHub](https://github.com/THF-evaluative-analytics/NHSR-introduction-to-data-wrangling)
+|11| Regression Modelling in R   | Chris Mainey | [GitHub](https://github.com/chrismainey/Regression_Modelling_NHSR2019)
 |12| Introduction to Shiny   | Chris Beeley | |
 |13| Automating outputs| Matthew Francis | |
 

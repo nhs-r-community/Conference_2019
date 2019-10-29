@@ -38,7 +38,7 @@ material.
 | -------- | :----------------------------------------------------------------- | :--------------------------: | ----------------------------------------------------------------------------------------: |
 | 7        | Introduction to R Markdown                                         |        David Whiting         |                                                                                           |
 | 8        | A worked introduction to Population Segmentation and PHM analytics | Adrian Pratt & Richard Wood  |                                                                                           |
-| 9        | Introduction to functional programming                             | Thomas Jemmet & Andrew Jones |                                                                                           |
+| 9        | Introduction to functional programming                             | Thomas Jemmet & Andrew Jones |                   [GitHub](https://github.com/tomjemmett/Functional_Programming_Workshop) |
 | 10       | Introduction to data wrangling                                     |        Emma Vestesson        | [GitHub](https://github.com/THF-evaluative-analytics/NHSR-introduction-to-data-wrangling) |
 | 11       | Regression Modelling in R                                          |         Chris Mainey         |                    [GitHub](https://github.com/chrismainey/Regression_Modelling_NHSR2019) |
 | 12       | Introduction to Shiny                                              |         Chris Beeley         |                                                                                           |
