@@ -21,12 +21,28 @@ material.
 
 ## Workshop sessions
 
-| Name                           |   Presenter    |                                                                                      Link |
-| ------------------------------ | :------------: | ----------------------------------------------------------------------------------------: |
-| Explainable Machine Learning   |  Hannah Frick  |            [GitHub](https://github.com/MangoTheCat/explainable-machine-learning-workshop) |
-| Introduction to data wrangling | Emma Vestesson | [GitHub](https://github.com/THF-evaluative-analytics/NHSR-introduction-to-data-wrangling) |
-| R for Excel Users              |   Sean Manzi   |                            [GitLab](https://gitlab.com/SManzi/r-for-excel-users-workshop) |
-| Regression Modelling in R      |  Chris Mainey  |                    [GitHub](https://github.com/chrismainey/Regression_Modelling_NHSR2019) |
+### Day1
+
+| Workshop | Name                                                                               |  Presenter   |                                                                           Link |
+| -------- | :--------------------------------------------------------------------------------- | :----------: | -----------------------------------------------------------------------------: |
+| 1        | R for Novices                                                                      |              |                                                                                |
+| 2        | R for Excel Users                                                                  |  Sean Manzi  |                 [GitLab](https://gitlab.com/SManzi/r-for-excel-users-workshop) |
+| 3        | Simulation modelling of patient flow using routinely collected data, with r-simmer |  Tom Lawton  |                                                                                |
+| 4        | Natural Language Processing (NLP) with R                                           | Steph Locke  |                                                                                |
+| 5        | Explainable Machine Learning                                                       | Hannah Frick | [GitHub](https://github.com/MangoTheCat/explainable-machine-learning-workshop) |
+| 6        | Introduction to ggplot2                                                            | Rhian Davis  |                                                                                |
+
+### Day 2
+
+| Workshop | Name                                                               |          Presenter           |                                                                                      Link |
+| -------- | :----------------------------------------------------------------- | :--------------------------: | ----------------------------------------------------------------------------------------: |
+| 7        | Introduction to R Markdown                                         |        David Whiting         |                                                                                           |
+| 8        | A worked introduction to Population Segmentation and PHM analytics | Adrian Pratt & Richard Wood  |                                                                                           |
+| 9        | Introduction to functional programming                             | Thomas Jemmet & Andrew Jones |                                                                                           |
+| 10       | Introduction to data wrangling                                     |        Emma Vestesson        | [GitHub](https://github.com/THF-evaluative-analytics/NHSR-introduction-to-data-wrangling) |
+| 11       | Regression Modelling in R                                          |         Chris Mainey         |                    [GitHub](https://github.com/chrismainey/Regression_Modelling_NHSR2019) |
+| 12       | Introduction to Shiny                                              |         Chris Beeley         |                                                                                           |
+| 13       | Automating outputs                                                 |       Matthew Francis        |                                                                                           |
 
 <br><br>
 
@@ -34,7 +50,7 @@ material.
 
 There are two ways to access the workshops:
 
-  - Using the RStudio Cloud Workspace **(OUr prefered option)**: All
+  - Using the RStudio Cloud Workspace **(Our prefered option)**: All
     material is available in the conference workspace:
     <https://bit.ly/2Nnblc2> . This works from your web browser, and you
     do not need R and Rstudio installd on your machine to access it.
