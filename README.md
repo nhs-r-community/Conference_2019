@@ -41,8 +41,8 @@ material.
 | 9        | Introduction to functional programming                             | Thomas Jemmet & Andrew Jones |                   [GitHub](https://github.com/tomjemmett/Functional_Programming_Workshop) |
 | 10       | Introduction to data wrangling                                     |        Emma Vestesson        | [GitHub](https://github.com/THF-evaluative-analytics/NHSR-introduction-to-data-wrangling) |
 | 11       | Regression Modelling in R                                          |         Chris Mainey         |                    [GitHub](https://github.com/chrismainey/Regression_Modelling_NHSR2019) |
-| 12       | Introduction to Shiny                                              |         Chris Beeley         |                                                                                           |
-| 13       | Automating outputs                                                 |       Matthew Francis        |                                                                                           |
+| 12       | Introduction to Shiny                                              |         Chris Beeley         |                                    [GitHub](https://github.com/ChrisBeeley/shinyworkshop) |
+| 13       | Introduction to RMarkdown                                          |       Matthew Francis        |                                                                                           |
 
 <br><br>
 
