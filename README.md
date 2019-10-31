@@ -42,7 +42,7 @@ material.
 | 10       | Introduction to data wrangling                                     |        Emma Vestesson        | [GitHub](https://github.com/THF-evaluative-analytics/NHSR-introduction-to-data-wrangling) |
 | 11       | Regression Modelling in R                                          |         Chris Mainey         |                    [GitHub](https://github.com/chrismainey/Regression_Modelling_NHSR2019) |
 | 12       | Introduction to Shiny                                              |         Chris Beeley         |                                    [GitHub](https://github.com/ChrisBeeley/shinyworkshop) |
-| 13       | Introduction to RMarkdown                                          |       Matthew Francis        |                                                                                           |
+| 13       | Introduction to RMarkdown                                          |       Matthew Francis        |                               [GitHub](https://github.com/matthew-francis/NHSRConference) |
 
 <br><br>
 
