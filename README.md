@@ -34,15 +34,15 @@ material.
 
 ### Day 2
 
-| Workshop | Name                                                               |          Presenter           |                                                                                      Link |
-| -------- | :----------------------------------------------------------------- | :--------------------------: | ----------------------------------------------------------------------------------------: |
-| 7        | Automation with R: creating the infrastructure                     |        David Whiting         |                                     [GitHub](https://github.com/daudi/NHS-R-workshop2019) |
-| 8        | A worked introduction to Population Segmentation and PHM analytics | Adrian Pratt & Richard Wood  |              [GitHub](https://github.com/nhs-bnssg-analytics/NHS-R-Conf2019-Segmentation) |
-| 9        | Introduction to functional programming                             | Thomas Jemmet & Andrew Jones |                   [GitHub](https://github.com/tomjemmett/Functional_Programming_Workshop) |
-| 10       | Introduction to data wrangling                                     |        Emma Vestesson        | [GitHub](https://github.com/THF-evaluative-analytics/NHSR-introduction-to-data-wrangling) |
-| 11       | Regression Modelling in R                                          |         Chris Mainey         |                    [GitHub](https://github.com/chrismainey/Regression_Modelling_NHSR2019) |
-| 12       | Introduction to Shiny                                              |         Chris Beeley         |                                    [GitHub](https://github.com/ChrisBeeley/shinyworkshop) |
-| 13       | Introduction to RMarkdown                                          |       Matthew Francis        |                               [GitHub](https://github.com/matthew-francis/NHSRConference) |
+| Workshop | Name                                                               |           Presenter           |                                                                                      Link |
+| -------- | :----------------------------------------------------------------- | :---------------------------: | ----------------------------------------------------------------------------------------: |
+| 7        | Automation with R: creating the infrastructure                     |         David Whiting         |                                     [GitHub](https://github.com/daudi/NHS-R-workshop2019) |
+| 8        | A worked introduction to Population Segmentation and PHM analytics |  Adrian Pratt & Richard Wood  |              [GitHub](https://github.com/nhs-bnssg-analytics/NHS-R-Conf2019-Segmentation) |
+| 9        | Introduction to functional programming                             | Thomas Jemmett & Andrew Jones |                   [GitHub](https://github.com/tomjemmett/Functional_Programming_Workshop) |
+| 10       | Introduction to data wrangling                                     |        Emma Vestesson         | [GitHub](https://github.com/THF-evaluative-analytics/NHSR-introduction-to-data-wrangling) |
+| 11       | Regression Modelling in R                                          |         Chris Mainey          |                    [GitHub](https://github.com/chrismainey/Regression_Modelling_NHSR2019) |
+| 12       | Introduction to Shiny                                              |         Chris Beeley          |                                    [GitHub](https://github.com/ChrisBeeley/shinyworkshop) |
+| 13       | Introduction to RMarkdown                                          |        Matthew Francis        |                               [GitHub](https://github.com/matthew-francis/NHSRConference) |
 
 <br><br>
 
