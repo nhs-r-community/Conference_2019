@@ -1,0 +1,2347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Locke Data" />
+  <title>Monty Python’s Flying Circus (of Text Analysis in R!)</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="CoreSlides_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="CoreSlides_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="lockedata.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Monty Python’s Flying Circus (of Text Analysis in R!)</h1>
+    <h2 class="author">Locke Data</h2>
+    <h3 class="date">NHS-R</h3>
+</section>
+
+<section class="slide level2">
+
+<!--
+Learn how to do text mining in R with the Monty Python movie scripts. A day full of text analysis! From grabbing text off the internet, wrangling text into an analysable format, performing sentiment analysis, working out key topics in a body of text, and more. 
+
+This is a *hands-on* training day. Basic R skills required.
+
+We'll be covering:
+- Overview of text analysis in R
+- Web scraping
+- Wrangling text for analysis
+- Performing sentiment analysis and visualising it
+- Identifying key words
+- Working with phrases
+- Working out the topic of text
+-->
+</section>
+<section><section id="welcome" class="title-slide slide level1"><h1>Welcome!</h1></section><section id="todays-aim" class="slide level2">
+<h2>Today’s aim</h2>
+<ul>
+<li class="fragment">Learn the fundamentals of text analysis in R</li>
+<li class="fragment">Have fun doing it</li>
+</ul>
+</section><section id="polls" class="slide level2">
+<h2>Polls</h2>
+<p>Hands up if you …</p>
+<ul>
+<li class="fragment">know the difference between a <code>table</code> and a <code>data.frame</code> in R</li>
+<li class="fragment">use <code>dplyr</code></li>
+<li class="fragment">have done webscraping in R</li>
+<li class="fragment">are an NLP expert</li>
+</ul>
+</section><section id="agenda" class="slide level2">
+<h2>Agenda</h2>
+<ul>
+<li>The Meaning of Life
+<ul>
+<li>Some initial concepts, a foray into text analytics the “cheating way”, and some fundamentals</li>
+</ul></li>
+<li>The Life of Brian
+<ul>
+<li>Learning how to perform simple text analysis tasks</li>
+</ul></li>
+<li>The Holy Grail
+<ul>
+<li>Performing more advanced text analysis</li>
+</ul></li>
+</ul>
+</section><section id="lets-get-ready" class="slide level2">
+<h2>Let’s get ready</h2>
+<ul>
+<li>Login details</li>
+<li><code>TextAnalysis</code> package</li>
+<li><a href="http://tidytextmining.com/">tidytextmining.com</a></li>
+</ul>
+</section></section>
+<section><section id="act-1-the-meaning-of-life" class="title-slide slide level1" data-background="http://www.asset1.net/tv/pictures/movie/monty-python%27s-the-meaning-of-life-1983/monty-pythons-the-meaning-of-life-tc.jpg"><h1>Act 1: The Meaning of Life</h1></section><section id="why-do-text-analysis" class="slide level2">
+<h2>Why do text analysis?</h2>
+<ul>
+<li><a href="http://varianceexplained.org/r/trump-tweets/">Trump’s tweets</a></li>
+<li><a href="http://tidytextmining.com/nasa.html">Categorising documents</a></li>
+<li><a href="http://www.bbc.co.uk/news/technology-39126027">Intervene before a suicide</a></li>
+<li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4981627/">Fraud detection</a></li>
+</ul>
+</section><section id="core-text-terms" class="slide level2">
+<h2>Core text terms</h2>
+<ul>
+<li><strong>word</strong></li>
+<li><strong>stop word</strong> a commonly used word</li>
+<li><strong>token</strong> a word or another meaningful grouping of text</li>
+<li><strong>n-gram</strong> an n-long seqence of words</li>
+<li><strong>sentiment</strong> the feeling indicated by the text</li>
+<li><strong>topic</strong> what the text is talking about</li>
+<li><strong>lexicon</strong> vocabulary / dictionary</li>
+</ul>
+</section><section id="how-things-hang-together-in-r" class="slide level2">
+<h2>How things hang together in R</h2>
+<ul>
+<li>Get text data
+<ul>
+<li>Use <code>rvest</code> to scrape web sites</li>
+</ul></li>
+<li>Clean data
+<ul>
+<li>Use <code>dplyr</code> for manipulation</li>
+<li>Use <code>tidytext</code> for text tokenisation &amp; more</li>
+</ul></li>
+<li>Summarise data
+<ul>
+<li>Use <code>tidytext</code></li>
+</ul></li>
+<li>Visualise data
+<ul>
+<li>Use <code>ggplot2</code></li>
+</ul></li>
+</ul>
+</section><section id="lets-start-simple" class="slide level2">
+<h2>Let’s start simple!</h2>
+<p>Use someone else’s hardwork e.g. Microsoft Cognitive Services</p>
+<p><a href="https://www.microsoft.com/cognitive-services/en-us/text-analytics-api">microsoft.com/cognitive-services</a></p>
+<blockquote>
+<p>[The service] returns a score between 0 and 1 denoting overall sentiment in the input text. Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment.</p>
+<p>Sentiment score is generated using classification techniques. The input features to the classifier include n-grams, features generated from part-of-speech tags, and embedded words. The classifier was trained in part using Sentiment140 data. <a href="https://www.microsoft.com/cognitive-services/en-us/text-analytics/documentation">Docs</a></p>
+</blockquote>
+</section><section id="using-the-sandbox" class="slide level2">
+<h2>Using the sandbox</h2>
+<blockquote>
+<p>I don’t want to talk to you no more, you empty headed animal food trough wiper. I fart in your general direction. Your mother was a hamster and your father smelt of elderberries.</p>
+</blockquote>
+</section><section id="using-r" class="slide level2">
+<h2>Using R</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(TextAnalysis)</a>
+<a class="sourceLine" id="cb1-2" title="2">text&lt;-<span class="st">&quot;I don&#39;t want to talk to you no more, you empty headed animal food trough wiper. I fart in your general direction. Your mother was a hamster and your father smelt of elderberries.&quot;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">someText&lt;-<span class="kw">data.frame</span>(<span class="dt">id=</span><span class="dv">1</span>, text)</a>
+<a class="sourceLine" id="cb1-4" title="4">result&lt;-<span class="kw">getSentiment</span>(someText)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">id</th>
+<th style="text-align: left;">text</th>
+<th style="text-align: left;">language</th>
+<th style="text-align: right;">score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">I don’t want to talk to you no more, you empty headed animal food trough wiper. I fart in your general direction. Your mother was a hamster and your father smelt of elderberries.</td>
+<td style="text-align: left;">en</td>
+<td style="text-align: right;">0.0856501</td>
+</tr>
+</tbody>
+</table>
+</section><section id="howd-this-do" class="slide level2">
+<h2>How’d this do?</h2>
+<p>Well…</p>
+<ul>
+<li class="fragment">0 is highly negative</li>
+<li class="fragment">1 is highly positive</li>
+<li class="fragment">So 0.09 is not very positive</li>
+<li class="fragment">Do we agree?</li>
+</ul>
+</section><section id="lets-try-less-ambiguous-text" class="slide level2">
+<h2>Let’s try less ambiguous text</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">text=<span class="kw">c</span>(<span class="st">&quot;I&#39;m filled with happiness and joy&quot;</span>,</a>
+<a class="sourceLine" id="cb2-2" title="2">       <span class="st">&quot;I&#39;m so sad right now and I want to cry&quot;</span>)</a>
+<a class="sourceLine" id="cb2-3" title="3">someMoreText&lt;-<span class="kw">data.frame</span>(<span class="dt">id=</span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,  text)</a>
+<a class="sourceLine" id="cb2-4" title="4">result&lt;-<span class="kw">getSentiment</span>(someMoreText)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">id</th>
+<th style="text-align: left;">text</th>
+<th style="text-align: left;">language</th>
+<th style="text-align: right;">score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">I’m filled with happiness and joy</td>
+<td style="text-align: left;">en</td>
+<td style="text-align: right;">0.8464015</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">I’m so sad right now and I want to cry</td>
+<td style="text-align: left;">en</td>
+<td style="text-align: right;">0.0007791</td>
+</tr>
+</tbody>
+</table>
+</section><section id="howd-this-do-1" class="slide level2">
+<h2>How’d this do?</h2>
+<p>Well…</p>
+<ul>
+<li class="fragment">0 is highly negative</li>
+<li class="fragment">1 is highly positive</li>
+<li class="fragment">Our happy line (line 1) got 0.85 is not very positive</li>
+<li class="fragment">Our unhappy line (line 2) got 0 is very negative</li>
+<li class="fragment">Do we agree?</li>
+</ul>
+</section><section id="what-might-be-the-problem-with-our-api" class="slide level2">
+<h2>What might be the problem with our API?</h2>
+<ul>
+<li class="fragment">Text longer than 140 chars</li>
+<li class="fragment">Idioms</li>
+<li class="fragment">Humour</li>
+<li class="fragment">No feedback loop</li>
+</ul>
+</section><section id="exercise" class="slide level2" data-background="http://nerdist.com/wp-content/uploads/2015/11/Silly-Walk-monty-python-13514283-1280-800-1024x640.jpg">
+<h2>Exercise</h2>
+<p>Use the API to get sentiment scores for 5 random lines from the Meaning of Life</p>
+<ul>
+<li>Use the dataset <code>scriptSpeech</code></li>
+<li>Filter to only lines from the Meaning of Life</li>
+<li>Take a sample of 5 of these</li>
+<li>Make the data conform to the spec required by <code>getSentiment()</code></li>
+<li>Get the sentiment scores for each line of speech</li>
+</ul>
+</section><section id="answer" class="slide level2">
+<h2>Answer</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">scriptSpeech <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Script<span class="op">==</span><span class="st">&quot;Meaning of Life&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">5</span>)  <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="st">  </span><span class="kw">select</span>(<span class="dt">id=</span>lineid, <span class="dt">text=</span>lines) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="st">  </span><span class="kw">getSentiment</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">id</th>
+<th style="text-align: left;">text</th>
+<th style="text-align: left;">language</th>
+<th style="text-align: right;">score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">4087</td>
+<td style="text-align: left;">be quiet! englishmen, you’re all so fucking pompous, and none of you have got any balls.</td>
+<td style="text-align: left;">en</td>
+<td style="text-align: right;">0.1321568</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2822</td>
+<td style="text-align: left;">yes!</td>
+<td style="text-align: left;">en</td>
+<td style="text-align: right;">0.8335907</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5354</td>
+<td style="text-align: left;">hallo. now, don’t you worry.</td>
+<td style="text-align: left;">en</td>
+<td style="text-align: right;">0.8141621</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5083</td>
+<td style="text-align: left;">oh, we’re just fine!</td>
+<td style="text-align: left;">en</td>
+<td style="text-align: right;">0.9740794</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3780</td>
+<td style="text-align: left;">excuse me, sir.</td>
+<td style="text-align: left;">en</td>
+<td style="text-align: right;">0.2281185</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section><section id="sentiment" class="title-slide slide level1" data-background="http://i35.photobucket.com/albums/d190/diamondkatana/Noplaceforsentiment.jpg"><h1>Sentiment</h1></section><section id="sentiment-by-the-word" class="slide level2">
+<h2>Sentiment: By the word</h2>
+<ul>
+<li>We can analyse sentiment at a variety of levels.</li>
+<li>Individual words is the simplest level.</li>
+<li>Various databases / lexicons available in the tidytext package</li>
+</ul>
+</section><section id="sentiment-negative-or-positive" class="slide level2">
+<h2>Sentiment: Negative or positive</h2>
+<ul>
+<li><a href="https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html">Bing Liu and co</a> lexicon is commonly used in English</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">word</th>
+<th style="text-align: left;">sentiment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">happy</td>
+<td style="text-align: left;">positive</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">unhappy</td>
+<td style="text-align: left;">negative</td>
+</tr>
+</tbody>
+</table>
+</section><section id="sentiment-scale-of-positivity" class="slide level2">
+<h2>Sentiment: Scale of positivity</h2>
+<ul>
+<li><a href="http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010">AFINN</a> lexicon is commonly used in English</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">word</th>
+<th style="text-align: right;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">happy</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">unhappy</td>
+<td style="text-align: right;">-2</td>
+</tr>
+</tbody>
+</table>
+</section><section id="sentiment-emotions" class="slide level2">
+<h2>Sentiment: Emotions</h2>
+<ul>
+<li><a href="http://saifmohammad.com/WebPages/lexicons.html">NRC Word-Emotion Association</a> lexicon is commonly used in English</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">word</th>
+<th style="text-align: left;">sentiment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">happy</td>
+<td style="text-align: left;">anticipation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">happy</td>
+<td style="text-align: left;">joy</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">happy</td>
+<td style="text-align: left;">positive</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">happy</td>
+<td style="text-align: left;">trust</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">unhappy</td>
+<td style="text-align: left;">anger</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">unhappy</td>
+<td style="text-align: left;">disgust</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">unhappy</td>
+<td style="text-align: left;">negative</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">unhappy</td>
+<td style="text-align: left;">sadness</td>
+</tr>
+</tbody>
+</table>
+</section><section id="lexicon-sizes" class="slide level2">
+<h2>Lexicon sizes</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">sentiments <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(lexicon) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n=</span><span class="kw">n_distinct</span>(word)) </a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">lexicon</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">afinn</td>
+<td style="text-align: right;">2477</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bing</td>
+<td style="text-align: right;">6783</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">loughran</td>
+<td style="text-align: right;">3917</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">nrc</td>
+<td style="text-align: right;">6468</td>
+</tr>
+</tbody>
+</table>
+</section><section id="how-to-get-sentiment-for-some-words" class="slide level2">
+<h2>How to get sentiment for some words</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">data.frame</span>(<span class="dt">word=</span><span class="kw">c</span>(<span class="st">&quot;holy&quot;</span>,<span class="st">&quot;bother&quot;</span>, <span class="st">&quot;crucified&quot;</span>, <span class="st">&quot;spanking&quot;</span>,<span class="st">&quot;happy&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw">left_join</span>(<span class="kw">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) -&gt;<span class="st"> </span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span>bingsentiment</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">word</th>
+<th style="text-align: left;">sentiment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">holy</td>
+<td style="text-align: left;">positive</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bother</td>
+<td style="text-align: left;">negative</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">crucified</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">spanking</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">happy</td>
+<td style="text-align: left;">positive</td>
+</tr>
+</tbody>
+</table>
+</section><section id="simple-overall-sentiment" class="slide level2">
+<h2>Simple overall sentiment</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">bingsentiment <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw">count</span>(sentiment) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span><span class="kw">slice</span>(<span class="kw">which.max</span>(n))</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">sentiment</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">positive</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+</section><section id="exercise-1" class="slide level2" data-background="http://nerdist.com/wp-content/uploads/2015/11/Silly-Walk-monty-python-13514283-1280-800-1024x640.jpg">
+<h2>Exercise</h2>
+<ul>
+<li>Use the dataset <code>scriptWords</code></li>
+<li>Filter to only words from the Meaning of Life</li>
+<li>Join the bing sentiment data</li>
+<li>Count how many positive and negative sentiment words there were</li>
+</ul>
+</section><section id="answer-1" class="slide level2">
+<h2>Answer</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">scriptWords <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Script<span class="op">==</span><span class="st">&quot;Meaning of Life&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw">left_join</span>(<span class="kw">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw">count</span>(sentiment)</a></code></pre></div>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">sentiment</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">negative</td>
+<td style="text-align: right;">128</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">positive</td>
+<td style="text-align: right;">124</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">1760</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section><section id="recap" class="title-slide slide level1"><h1>Recap</h1></section><section id="sentiment-analysis" class="slide level2">
+<h2>Sentiment analysis</h2>
+<ul>
+<li>You can use APIs to perform sentiment analysis quickly
+<ul>
+<li>But it has it’s downsides</li>
+</ul></li>
+<li>You can perform sentiment analysis by scoring words in text using lexicons</li>
+</ul>
+</section><section id="dplyr" class="slide level2">
+<h2>dplyr</h2>
+<ul>
+<li>General data manipulation package</li>
+<li>Chain commands with <code>%&gt;%</code></li>
+<li>Verbs used so far: <code>left_join</code>, <code>count</code>, <code>slice</code>, <code>sample_n</code>, <code>filter</code>, <code>select</code></li>
+</ul>
+</section><section id="tidytext" class="slide level2">
+<h2>tidytext</h2>
+<ul>
+<li>Used for tidy text analysis</li>
+<li>Used so far: <code>sentiments</code> table</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">sentiments <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lexicon=</span><span class="st">&quot;bing&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="st">  </span><span class="kw">bind_rows</span>(</a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="kw">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">lexicon=</span><span class="st">&quot;afinn&quot;</span>) ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="st">  </span><span class="kw">bind_rows</span>(</a>
+<a class="sourceLine" id="cb9-7" title="7">    <span class="kw">get_sentiments</span>(<span class="st">&quot;loughran&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">lexicon=</span><span class="st">&quot;loughran&quot;</span>) ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-9" title="9"><span class="st">  </span><span class="kw">bind_rows</span>(</a>
+<a class="sourceLine" id="cb9-10" title="10">    <span class="kw">get_sentiments</span>(<span class="st">&quot;nrc&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">lexicon=</span><span class="st">&quot;nrc&quot;</span>) )-&gt;</a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="st">  </span>sentiments</a></code></pre></div>
+</section></section>
+<section><section id="act-2-life-of-brian" class="title-slide slide level1" data-background="https://i.ytimg.com/vi/_qlEMniGPSc/maxresdefault.jpg"><h1>Act 2: Life of Brian</h1></section><section id="working-with-all-three-lexicons" class="slide level2">
+<h2>Working with all three lexicons</h2>
+<p>If you’re not sure which sentiment lexicon you want to use, you can use them all and filter later.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">scriptWords <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="st">  </span><span class="kw">inner_join</span>(sentiments) -&gt;</a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="st">  </span>scoredWords</a></code></pre></div>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">Character</th>
+<th style="text-align: left;">word</th>
+<th style="text-align: left;">sentiment</th>
+<th style="text-align: left;">lexicon</th>
+<th style="text-align: right;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">dennis</td>
+<td style="text-align: left;">special</td>
+<td style="text-align: left;">joy</td>
+<td style="text-align: left;">nrc</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Meaning of Life</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">atkinson</td>
+<td style="text-align: left;">honest</td>
+<td style="text-align: left;">disgust</td>
+<td style="text-align: left;">nrc</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">zoot</td>
+<td style="text-align: left;">art</td>
+<td style="text-align: left;">joy</td>
+<td style="text-align: left;">nrc</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">father</td>
+<td style="text-align: left;">leave</td>
+<td style="text-align: left;">sadness</td>
+<td style="text-align: left;">nrc</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">mortician</td>
+<td style="text-align: left;">shit</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: left;">nrc</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</section><section id="positive-or-negative-data" class="slide level2">
+<h2>Positive or negative? Data</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">scoredWords <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="st">  </span><span class="kw">filter</span>(lexicon<span class="op">==</span><span class="st">&quot;bing&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="st">  </span><span class="kw">count</span>(Script,Part,sentiment) -&gt;</a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="st">  </span>bingScoreSummary</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">sentiment</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: right;">73</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: right;">68</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: right;">62</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: right;">22</td>
+</tr>
+</tbody>
+</table>
+</section><section id="positive-or-negative-charts" class="slide level2">
+<h2>Positive or Negative? Charts</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">ggplot</span>(bingScoreSummary, <span class="kw">aes</span>(<span class="dt">x=</span>sentiment, <span class="dt">y=</span>n, <span class="dt">fill=</span>sentiment)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span><span class="kw">geom_col</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="st">  </span><span class="kw">facet_grid</span>(Script <span class="op">~</span><span class="st"> </span>Part,<span class="dt">margins =</span> <span class="ot">TRUE</span>, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>,<span class="dt">switch =</span> <span class="st">&quot;y&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="st">  </span><span class="kw">theme_void</span>()<span class="op">+</span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;bottom&quot;</span>)</a></code></pre></div>
+<p><img src="CoreSlides_files/figure-revealjs/unnamed-chunk-22-1.png" width="768" /></p>
+</section><section id="positive-or-negative-charts-1" class="slide level2">
+<h2>Positive or Negative? Charts</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">ggplot</span>(bingScoreSummary, <span class="kw">aes</span>(<span class="dt">x=</span>Part, <span class="dt">y=</span>n, <span class="dt">fill=</span>sentiment)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>,<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Script)<span class="op">+</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="st">  </span><span class="kw">theme_void</span>()<span class="op">+</span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;bottom&quot;</span>)</a></code></pre></div>
+<p><img src="CoreSlides_files/figure-revealjs/unnamed-chunk-23-1.png" width="768" /></p>
+</section><section id="emotions-data" class="slide level2">
+<h2>Emotions? Data</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">scoredWords <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="st">  </span><span class="kw">filter</span>(lexicon<span class="op">==</span><span class="st">&quot;nrc&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="st">  </span><span class="kw">count</span>(Script,Part,sentiment) -&gt;</a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="st">  </span>nrcScoreSummary</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">sentiment</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">anger</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">anticipation</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">disgust</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">fear</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">joy</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: right;">41</td>
+</tr>
+</tbody>
+</table>
+</section><section id="emotions-charts" class="slide level2">
+<h2>Emotions? Charts</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">ggplot</span>(nrcScoreSummary, <span class="kw">aes</span>(<span class="dt">x=</span>Part, <span class="dt">y=</span>n))<span class="op">+</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw">geom_col</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="st">  </span><span class="kw">facet_grid</span>(Script<span class="op">~</span>sentiment,<span class="dt">switch =</span> <span class="st">&quot;y&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="st">  </span><span class="kw">theme_void</span>()</a></code></pre></div>
+<p><img src="CoreSlides_files/figure-revealjs/unnamed-chunk-26-1.png" width="768" /></p>
+</section><section id="emotions-charts-1" class="slide level2">
+<h2>Emotions? Charts</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">ggplot</span>(nrcScoreSummary, <span class="kw">aes</span>(<span class="dt">x=</span>sentiment,<span class="dt">y=</span>n))<span class="op">+</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="st">  </span><span class="kw">geom_col</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="st">  </span><span class="kw">coord_flip</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Script)<span class="op">+</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="st">  </span><span class="kw">theme_void</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text  =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">0</span>))</a></code></pre></div>
+<p><img src="CoreSlides_files/figure-revealjs/unnamed-chunk-27-1.png" width="768" /></p>
+</section><section id="exercise-2" class="slide level2" data-background="http://nerdist.com/wp-content/uploads/2015/11/Silly-Walk-monty-python-13514283-1280-800-1024x640.jpg">
+<h2>Exercise</h2>
+<ul>
+<li>Get summarised Bing sentiment scores for the top 10 most talkative characters in the Life of Brian
+<ul>
+<li>Filter <code>scoredWords</code> to words with bing sentiment scores</li>
+<li>Filter to the Life of Brian script</li>
+<li>Count words by character and sentiment</li>
+<li>Add an extra column that does the total words by character using <code>mutate</code></li>
+<li>Ungroup and select the 10 characters with the most words overall using <code>top_n</code></li>
+</ul></li>
+<li>Use this data to produce a stacked bar chart of sentiment by character</li>
+<li>Use this data to produce a stacked, 100% bar chart of sentiment by character</li>
+</ul>
+</section><section id="answer-p1" class="slide level2">
+<h2>Answer p1</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">scoredWords <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="st">  </span><span class="kw">filter</span>(lexicon<span class="op">==</span><span class="st">&quot;bing&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="st">  </span><span class="kw">filter</span>(Script<span class="op">==</span><span class="st">&quot;Life of Brian&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="st">  </span><span class="kw">count</span>(Character,sentiment) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">TotalWords=</span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-6" title="6"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-7" title="7"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">20</span>,TotalWords) -&gt;</a>
+<a class="sourceLine" id="cb18-8" title="8"><span class="st">  </span>lifeofbriansentiment</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Character</th>
+<th style="text-align: left;">sentiment</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">TotalWords</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">before you join us, know this</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">408</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">before you join us, know this</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">408</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">arthur</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">408</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">arthur</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">408</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">arthur and harry</td>
+<td style="text-align: left;">positive</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">408</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">beggar</td>
+<td style="text-align: left;">negative</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">408</td>
+</tr>
+</tbody>
+</table>
+</section><section id="answer-p2" class="slide level2">
+<h2>Answer p2</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">ggplot</span>(lifeofbriansentiment, <span class="kw">aes</span>(<span class="dt">x=</span>Character,<span class="dt">y=</span>n,<span class="dt">fill=</span>sentiment))<span class="op">+</span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="st">  </span><span class="kw">theme_minimal</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb19-4" title="4"><span class="st">  </span><span class="kw">coord_flip</span>()</a></code></pre></div>
+<p><img src="CoreSlides_files/figure-revealjs/unnamed-chunk-30-1.png" width="768" /></p>
+</section><section id="answer-p3" class="slide level2">
+<h2>Answer p3</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">ggplot</span>(lifeofbriansentiment, <span class="kw">aes</span>(<span class="dt">x=</span>Character,<span class="dt">y=</span>n,<span class="dt">fill=</span>sentiment))<span class="op">+</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>,<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="st">  </span><span class="kw">theme_minimal</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb20-4" title="4"><span class="st">  </span><span class="kw">coord_flip</span>()</a></code></pre></div>
+<p><img src="CoreSlides_files/figure-revealjs/unnamed-chunk-31-1.png" width="768" /></p>
+</section></section>
+<section><section id="and-now-for-something-completely-different" class="title-slide slide level1" data-background="https://ichef.bbci.co.uk/images/ic/1200x675/p01gk35d.jpg"><h1>And now for something completely different…</h1></section><section id="the-tidy-text-concept" class="slide level2">
+<h2>The tidy text concept</h2>
+<p>We’ve been working with tabular data but until pretty darn recently text processing was pretty messy. Enter <a href="http://juliasilge.com/">Julia Silge</a> with the package <code>tidytext</code> and the fab book <a href="http://tidytextmining.com">Tidy Text Mining</a>.</p>
+<p>Let’s look at how we’ve been applying some of the tidy text principles.</p>
+</section><section id="need-scripts-in-a-tidy-format" class="slide level2">
+<h2>Need scripts in a tidy format</h2>
+<p>Get each script / document as a row in a data.frame.</p>
+<ul>
+<li class="fragment">We’ll look at webscraping later but for now, just inspect <code>getScriptData</code>.</li>
+<li class="fragment">Key part is fetching data</li>
+<li class="fragment">Add IDs with <code>row_number()</code></li>
+</ul>
+</section><section class="slide level2">
+
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">getScriptURLs</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">by_row</span>(getScript) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">bind_rows</span>()</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 6
+##   showid scriptid Script   Part  URL             ScriptText                
+##    &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;                     
+## 1      2        6 Holy Gr~ 3     http://www.mon~ &quot;\r\n\t\r\n\t\r\n\r\n\r\n~</code></pre>
+</section><section id="housekeeping" class="slide level2">
+<h2>Housekeeping</h2>
+<ul>
+<li>Inevitably, text isn’t very clean, especially after web scraping! You need to perform cleanup.</li>
+<li>Make sure to add IDs to entity observations as you go along
+<ul>
+<li>IDs for scripts</li>
+<li>IDs for lines</li>
+<li>etc</li>
+</ul></li>
+</ul>
+<ul>
+<li class="fragment">With scripts, we need to remove extra content like actions, cast list, and preamble</li>
+<li class="fragment">Inspect <code>getScriptData</code>, <code>getScriptLines</code>, <code>getScriptSpeech</code></li>
+</ul>
+</section><section id="decomposing-to-tokens" class="slide level2">
+<h2>Decomposing to tokens</h2>
+<p>We need to transform overall text to smaller tokens, whether paragraphs, lines, n-grams, or words.</p>
+<ul>
+<li class="fragment">Use <code>unnest_tokens()</code> to perform the decomposition</li>
+<li class="fragment">Inspect <code>getScriptLines</code> to see decomposition to lines</li>
+</ul>
+</section><section class="slide level2">
+
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">getScriptData</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="st">  </span><span class="kw">unnest_tokens</span>(lines, ScriptText, <span class="dt">token =</span> <span class="st">&quot;lines&quot;</span>, <span class="dt">collapse =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">showid</th>
+<th style="text-align: right;">scriptid</th>
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">URL</th>
+<th style="text-align: left;">lines</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm1.php</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm1.php</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm1.php</td>
+<td style="text-align: left;">monty python live at the hollywood bowl script part 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm1.php</td>
+<td style="text-align: left;">sit on my face</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm1.php</td>
+<td style="text-align: left;">self-wrestling</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm1.php</td>
+<td style="text-align: left;">never be rude to an arab part 1</td>
+</tr>
+</tbody>
+</table>
+</section><section id="stop-words" class="slide level2">
+<h2>Stop words</h2>
+<p>There are many words that are very common connectors in text. As they’re so common, they add little to an analysis so these are often removed.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">word</th>
+<th style="text-align: left;">lexicon</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">i</td>
+<td style="text-align: left;">snowball</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">given</td>
+<td style="text-align: left;">SMART</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">themselves</td>
+<td style="text-align: left;">SMART</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">perhaps</td>
+<td style="text-align: left;">onix</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">very</td>
+<td style="text-align: left;">onix</td>
+</tr>
+</tbody>
+</table>
+</section><section id="removing-stopwords" class="slide level2">
+<h2>Removing stopwords</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">getScriptSpeech</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="st">  </span><span class="kw">unnest_tokens</span>(word, lines) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="st">  </span><span class="kw">anti_join</span>(stop_words)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">URL</th>
+<th style="text-align: left;">Character</th>
+<th style="text-align: left;">word</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm3.php</td>
+<td style="text-align: left;">wife</td>
+<td style="text-align: left;">landing</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm2.php</td>
+<td style="text-align: left;">eric idle</td>
+<td style="text-align: left;">conditioned</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Life of Brian</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../brianmm2.php</td>
+<td style="text-align: left;">matthias</td>
+<td style="text-align: left;">legs</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Life of Brian</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../brianmm1.php</td>
+<td style="text-align: left;">brian</td>
+<td style="text-align: left;">struggling</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Meaning of Life</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../meaningmm3.php</td>
+<td style="text-align: left;">man</td>
+<td style="text-align: left;">uh</td>
+</tr>
+</tbody>
+</table>
+</section><section id="exercise-3" class="slide level2" data-background="http://nerdist.com/wp-content/uploads/2015/11/Silly-Walk-monty-python-13514283-1280-800-1024x640.jpg">
+<h2>Exercise</h2>
+<p>What were the most prevalent stop words by script?</p>
+<ul>
+<li>Start with the <code>scriptLines</code> dataset</li>
+<li>Filter it to where a line is Speech and not an Action</li>
+<li>Use <code>unnest_tokens</code> to decompose lines to words</li>
+<li>Use <code>semi_join</code> with <code>stop_words</code> to get the overlap</li>
+<li>Count by script and word</li>
+<li>Return top 5 by script</li>
+</ul>
+</section><section id="answer-2" class="slide level2">
+<h2>Answer</h2>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">scriptLines <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Speech, <span class="op">!</span>Action) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="st">  </span><span class="kw">unnest_tokens</span>(word, lines) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-4" title="4"><span class="st">  </span><span class="kw">semi_join</span>(stop_words) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-5" title="5"><span class="st">  </span><span class="kw">count</span>(Script, word) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(Script) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-7" title="7"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">5</span>) -&gt;</a>
+<a class="sourceLine" id="cb25-8" title="8"><span class="st">  </span>topStopWords</a></code></pre></div>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+<pre><code>## Selecting by n</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">word</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">a</td>
+<td style="text-align: right;">184</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">and</td>
+<td style="text-align: right;">161</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">i</td>
+<td style="text-align: right;">156</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">the</td>
+<td style="text-align: right;">308</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">you</td>
+<td style="text-align: right;">188</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">a</td>
+<td style="text-align: right;">163</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section><section id="recap-1" class="title-slide slide level1"><h1>Recap</h1></section><section id="sentiment-analysis-1" class="slide level2">
+<h2>Sentiment analysis</h2>
+<ul>
+<li>You can use APIs to perform sentiment analysis quickly
+<ul>
+<li>But it has it’s downsides</li>
+</ul></li>
+<li>You can perform sentiment analysis by scoring words in text using lexicons</li>
+<li>You can use the way a text is broken down to see sentiment change over the course of the text</li>
+<li>You need to decompose bigger documents into smaller components</li>
+<li>You should remove stop words</li>
+</ul>
+</section><section id="dplyr-1" class="slide level2">
+<h2>dplyr</h2>
+<ul>
+<li>General data manipulation package</li>
+<li>Chain commands with <code>%&gt;%</code></li>
+<li>Verbs used so far: <code>left_join</code>, <code>count</code>, <code>slice</code>, <code>sample_n</code>, <code>filter</code>, <code>select</code>, <code>top_n</code>, <code>semi_join</code>, <code>anti_join</code>, <code>mutate</code></li>
+</ul>
+</section><section id="tidytext-1" class="slide level2">
+<h2>tidytext</h2>
+<ul>
+<li>Used for tidy text analysis</li>
+<li>Used so far: <code>sentiments</code> table, <code>get_sentiments</code>, <code>unnest_tokens</code></li>
+</ul>
+</section><section id="ggplot2" class="slide level2">
+<h2>ggplot2</h2>
+<ul>
+<li>Used for charting</li>
+<li>Made basic and facetted plots with different types of series</li>
+</ul>
+</section></section>
+<section><section id="act-3-the-holy-grail" class="title-slide slide level1" data-background="http://myparktheatre.com/wp-content/uploads/2015/06/Monty_Python_Holy_Grail.jpg"><h1>Act 3: The Holy Grail</h1></section><section id="beyond-simple-sentiment" class="slide level2">
+<h2>Beyond simple sentiment</h2>
+<p>Sentiment analysis is hip and everybody’s doing it on Twitter but there’s a lot more fish in the sea!</p>
+</section><section id="tf-idf" class="slide level2">
+<h2>tf-idf</h2>
+<p>tf-idf is how important a word is to a given text, relative to it’s presence in other documents</p>
+<ul>
+<li>Term frequency (tf) tells you the proportion of words in a document that are a given word</li>
+<li>Inverse document frequency (idf) is the log of the count of all documents vs. the count of docs with the term in</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">wordfreqindoc     &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb28-2" title="2">wordsindoc        &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb28-3" title="3">documentswithword &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb28-4" title="4">totaldocuments    &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb28-5" title="5"></a>
+<a class="sourceLine" id="cb28-6" title="6">tf &lt;-<span class="st"> </span>wordfreqindoc<span class="op">/</span>wordsindoc</a>
+<a class="sourceLine" id="cb28-7" title="7">idf &lt;-<span class="st"> </span><span class="kw">log</span>(totaldocuments<span class="op">/</span>documentswithword)</a>
+<a class="sourceLine" id="cb28-8" title="8"><span class="st">`</span><span class="dt">tf-idf</span><span class="st">`</span> &lt;-<span class="st"> </span>tf<span class="op">*</span>idf</a>
+<a class="sourceLine" id="cb28-9" title="9"><span class="st">`</span><span class="dt">tf-idf</span><span class="st">`</span></a></code></pre></div>
+<pre><code>## [1] 0.06931472</code></pre>
+</section><section id="tf-idf-1" class="slide level2">
+<h2>tf-idf</h2>
+<p><img src="CoreSlides_files/figure-revealjs/unnamed-chunk-42-1.png" width="768" /></p>
+</section><section id="using-tf-idf" class="slide level2">
+<h2>Using tf-idf</h2>
+<p>We can calculate tf_idf using tidytext for our scripts.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">scriptAllWords <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-2" title="2"><span class="st">  </span><span class="kw">count</span>(Script, word) -&gt;</a>
+<a class="sourceLine" id="cb30-3" title="3"><span class="st">  </span>wordfreqs</a>
+<a class="sourceLine" id="cb30-4" title="4"></a>
+<a class="sourceLine" id="cb30-5" title="5">wordfreqs <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb30-6" title="6"><span class="st">  </span><span class="kw">bind_tf_idf</span>(word, Script, n) -&gt;</a>
+<a class="sourceLine" id="cb30-7" title="7"><span class="st">  </span>wordtfidf</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">word</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">tf</th>
+<th style="text-align: right;">idf</th>
+<th style="text-align: right;">tf_idf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">times</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0003113</td>
+<td style="text-align: right;">0.2876821</td>
+<td style="text-align: right;">0.0000896</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">seem</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0001556</td>
+<td style="text-align: right;">0.6931472</td>
+<td style="text-align: right;">0.0001079</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">bother</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0003113</td>
+<td style="text-align: right;">1.3862944</td>
+<td style="text-align: right;">0.0004315</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">three</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0.0026459</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">aramathea</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0003113</td>
+<td style="text-align: right;">1.3862944</td>
+<td style="text-align: right;">0.0004315</td>
+</tr>
+</tbody>
+</table>
+</section><section id="using-tf-idf-1" class="slide level2">
+<h2>Using tf-idf</h2>
+<p>This can tell us about important people or topics in each script.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">wordtfidf <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Script) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb31-3" title="3"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">5</span>, tf_idf)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">word</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">tf</th>
+<th style="text-align: right;">idf</th>
+<th style="text-align: right;">tf_idf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">grail</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">0.0049805</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0069045</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">ni</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">0.0049805</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0069045</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">launcelot</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0.0034241</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0047468</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">witch</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.0031128</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0043153</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">castle</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">0.0029572</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0040995</td>
+</tr>
+</tbody>
+</table>
+</section><section id="exercise-4" class="slide level2" data-background="http://nerdist.com/wp-content/uploads/2015/11/Silly-Walk-monty-python-13514283-1280-800-1024x640.jpg">
+<h2>Exercise</h2>
+<p>Plot the 10 most important words per script</p>
+<ul>
+<li>Calculate term frequency by script</li>
+<li>Use <code>bind_tf_idf</code> to calculate tf-idf for each term in each script</li>
+<li>Take the top 10 terms by tf-idf for each script</li>
+<li>Use this dataset to construct a plot for each script</li>
+</ul>
+</section><section id="answer-3" class="slide level2">
+<h2>Answer</h2>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">scriptAllWords <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="st">  </span><span class="kw">count</span>(Script, word) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-3" title="3"><span class="st">  </span><span class="kw">bind_tf_idf</span>(word, Script, n) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Script) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-5" title="5"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">10</span>, tf_idf) -&gt;</a>
+<a class="sourceLine" id="cb32-6" title="6"><span class="st">  </span>top10words</a>
+<a class="sourceLine" id="cb32-7" title="7"></a>
+<a class="sourceLine" id="cb32-8" title="8"><span class="kw">ggplot</span>(top10words, <span class="kw">aes</span>(<span class="dt">x=</span>word, <span class="dt">y=</span>tf_idf)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb32-9" title="9"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb32-10" title="10"><span class="st">  </span><span class="kw">coord_flip</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb32-11" title="11"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Script, <span class="dt">scales=</span><span class="st">&quot;free&quot;</span>)</a></code></pre></div>
+<p><img src="CoreSlides_files/figure-revealjs/unnamed-chunk-47-1.png" width="768" /></p>
+</section><section id="beyond-single-word-sentiment" class="slide level2">
+<h2>Beyond single-word sentiment</h2>
+<p>We mentioned in the Meaning of Life about n-grams! Let’s take a look at what we can do with n-grams.</p>
+</section><section id="making-n-grams" class="slide level2">
+<h2>Making n-grams</h2>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">scriptSpeech <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="st">  </span><span class="kw">unnest_tokens</span>(bigram, lines, <span class="dt">token =</span> <span class="st">&quot;ngrams&quot;</span>, <span class="dt">n=</span><span class="dv">2</span>) -&gt;</a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="st">  </span>bigrams</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">URL</th>
+<th style="text-align: left;">Character</th>
+<th style="text-align: left;">bigram</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">bedevere</td>
+<td style="text-align: left;">and that</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">bedevere</td>
+<td style="text-align: left;">that my</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">bedevere</td>
+<td style="text-align: left;">my liege</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">bedevere</td>
+<td style="text-align: left;">liege is</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">bedevere</td>
+<td style="text-align: left;">is how</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">bedevere</td>
+<td style="text-align: left;">how we</td>
+</tr>
+</tbody>
+</table>
+</section><section id="removing-n-grams-containing-stop-words" class="slide level2">
+<h2>Removing n-grams containing stop words</h2>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">bigrams <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">separate</span>(bigram, <span class="kw">c</span>(<span class="st">&quot;word1&quot;</span>, <span class="st">&quot;word2&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="st">  </span><span class="kw">anti_join</span>(stop_words, <span class="kw">c</span>(<span class="st">&quot;word1&quot;</span>=<span class="st">&quot;word&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-4" title="4"><span class="st">  </span><span class="kw">anti_join</span>(stop_words, <span class="kw">c</span>(<span class="st">&quot;word2&quot;</span>=<span class="st">&quot;word&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-5" title="5"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">unite</span>(bigram, word1, word2, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>) -&gt;</a>
+<a class="sourceLine" id="cb34-6" title="6"><span class="st">  </span>meaningfulBigrams</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">URL</th>
+<th style="text-align: left;">Character</th>
+<th style="text-align: left;">bigram</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">NA NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">arthur</td>
+<td style="text-align: left;">bloody peasant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">arthur</td>
+<td style="text-align: left;">NA NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">arthur</td>
+<td style="text-align: left;">sacred quest</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">arthur</td>
+<td style="text-align: left;">holy grail</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">arthur</td>
+<td style="text-align: left;">sir knight</td>
+</tr>
+</tbody>
+</table>
+</section><section id="most-common-n-grams" class="slide level2">
+<h2>Most common n-grams</h2>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">meaningfulBigrams <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="st">  </span><span class="kw">count</span>(Script, bigram) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(Script) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-4" title="4"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">5</span>, n) -&gt;</a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="st">  </span>topBigrams</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">bigram</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">haw haw</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">holy grail</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">NA NA</td>
+<td style="text-align: right;">107</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">ni ni</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">sir launcelot</td>
+<td style="text-align: right;">12</td>
+</tr>
+</tbody>
+</table>
+</section><section id="working-with-negations" class="slide level2">
+<h2>Working with negations</h2>
+<p>One of the biggest problems with single word sentiment analysis is a lack of negation.</p>
+<p>Including these in n-grams allows us to look at where misclassifications happen.</p>
+</section><section id="negations-are-stop-words" class="slide level2">
+<h2>Negations are stop words</h2>
+<p>Negations are stop words so we need to remove negations from our list of stop words.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">stop_words <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb36-2" title="2"><span class="st">  </span><span class="kw">anti_join</span>(negations) -&gt;</a>
+<a class="sourceLine" id="cb36-3" title="3"><span class="st">  </span>new_stop_words</a></code></pre></div>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+</section><section id="remove-stop-words" class="slide level2">
+<h2>Remove stop words</h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">bigrams <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">separate</span>(bigram, <span class="kw">c</span>(<span class="st">&quot;word1&quot;</span>, <span class="st">&quot;word2&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-3" title="3"><span class="st">  </span><span class="kw">anti_join</span>(new_stop_words, <span class="kw">c</span>(<span class="st">&quot;word1&quot;</span>=<span class="st">&quot;word&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-4" title="4"><span class="st">  </span><span class="kw">anti_join</span>(stop_words, <span class="kw">c</span>(<span class="st">&quot;word2&quot;</span>=<span class="st">&quot;word&quot;</span>)) -&gt;</a>
+<a class="sourceLine" id="cb38-5" title="5"><span class="st">  </span>incNegationsBigrams</a></code></pre></div>
+</section><section id="negated-words" class="slide level2">
+<h2>Negated words</h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">incNegationsBigrams <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="st">  </span><span class="kw">filter</span>(word1 <span class="op">%in%</span><span class="st"> </span>negations<span class="op">$</span>word) -&gt;<span class="st"> </span></a>
+<a class="sourceLine" id="cb39-3" title="3"><span class="st">  </span>negatedWords</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">URL</th>
+<th style="text-align: left;">Character</th>
+<th style="text-align: left;">word1</th>
+<th style="text-align: left;">word2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm2.php</td>
+<td style="text-align: left;">father</td>
+<td style="text-align: left;">doesn’t</td>
+<td style="text-align: left;">leave</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">guard #1</td>
+<td style="text-align: left;">not</td>
+<td style="text-align: left;">carry</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm1.php</td>
+<td style="text-align: left;">god</td>
+<td style="text-align: left;">don’t</td>
+<td style="text-align: left;">grovel</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm3.php</td>
+<td style="text-align: left;">galahad</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">yel</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../grailmm2.php</td>
+<td style="text-align: left;">head knight</td>
+<td style="text-align: left;">never</td>
+<td style="text-align: left;">pass</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">## Negate sen</td>
+<td style="text-align: left;">timent</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">negatedWords <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-2" title="2"><span class="st">  </span><span class="kw">inner_join</span>(<span class="kw">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>),<span class="kw">c</span>(<span class="st">&quot;word2&quot;</span>=<span class="st">&quot;word&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sentiment=</span><span class="kw">ifelse</span>(sentiment<span class="op">==</span><span class="st">&quot;positive&quot;</span>,<span class="st">&quot;negative&quot;</span>,<span class="st">&quot;positive&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-4" title="4"><span class="st">  </span><span class="kw">select</span>( <span class="kw">everything</span>(),<span class="dt">word=</span>word2,<span class="op">-</span>word1) -&gt;</a>
+<a class="sourceLine" id="cb40-5" title="5"><span class="st">  </span>negatedSentiment</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">showid</th>
+<th style="text-align: right;">scriptid</th>
+<th style="text-align: right;">lineid</th>
+<th style="text-align: right;">characterid</th>
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">URL</th>
+<th style="text-align: left;">Speech</th>
+<th style="text-align: left;">Action</th>
+<th style="text-align: left;">Character</th>
+<th style="text-align: left;">word</th>
+<th style="text-align: left;">sentiment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5581</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm1.php</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">pope</td>
+<td style="text-align: left;">happy</td>
+<td style="text-align: left;">negative</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5594</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm1.php</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">pope</td>
+<td style="text-align: left;">happy</td>
+<td style="text-align: left;">negative</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2574</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm2.php</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">announcer</td>
+<td style="text-align: left;">lack</td>
+<td style="text-align: left;">positive</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2574</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm2.php</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">announcer</td>
+<td style="text-align: left;">free</td>
+<td style="text-align: left;">negative</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3400</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm2.php</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">constable</td>
+<td style="text-align: left;">prosecute</td>
+<td style="text-align: left;">positive</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3700</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Hollywood Bowl</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><a href="http://www.montypython.net/" class="uri">http://www.montypython.net/</a>../hbowlmm2.php</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">eric idle</td>
+<td style="text-align: left;">won</td>
+<td style="text-align: left;">negative</td>
+</tr>
+</tbody>
+</table>
+</section><section id="using-tf-idf-on-n-grams" class="slide level2">
+<h2>Using tf-idf on n-grams</h2>
+<p>We can calculate tf_idf on n-grams too</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">meaningfulBigrams <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="st">  </span><span class="kw">count</span>(Script, bigram) -&gt;</a>
+<a class="sourceLine" id="cb41-3" title="3"><span class="st">  </span>bigramfreqs</a>
+<a class="sourceLine" id="cb41-4" title="4"></a>
+<a class="sourceLine" id="cb41-5" title="5">bigramfreqs <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb41-6" title="6"><span class="st">  </span><span class="kw">bind_tf_idf</span>(bigram, Script, n) -&gt;</a>
+<a class="sourceLine" id="cb41-7" title="7"><span class="st">  </span>bigramtfidf</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">bigram</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">tf</th>
+<th style="text-align: right;">idf</th>
+<th style="text-align: right;">tf_idf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">stay ere</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.001692</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0023457</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">thirds majority</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.001692</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0023457</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">idiom sir</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.001692</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0023457</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">outrageous accent</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.001692</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0023457</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">witch witch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.001692</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0023457</td>
+</tr>
+</tbody>
+</table>
+</section><section id="using-tf-idf-on-n-grams-1" class="slide level2">
+<h2>Using tf-idf on n-grams</h2>
+<p>Are the most important terms the same as the most common ones?</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">bigramtfidf <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb42-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Script) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb42-3" title="3"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">5</span>, tf_idf)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">bigram</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">tf</th>
+<th style="text-align: right;">idf</th>
+<th style="text-align: right;">tf_idf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">holy grail</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0.0219966</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0304938</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">sir launcelot</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.0203046</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0281481</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">haw haw</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.0152284</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0211111</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">ni ni</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.0135364</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0187654</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">arthur king</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.0118443</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0164197</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">sir galahad</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.0118443</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0164197</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Holy Grail</td>
+<td style="text-align: left;">sir robin</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.0118443</td>
+<td style="text-align: right;">1.386294</td>
+<td style="text-align: right;">0.0164197</td>
+</tr>
+</tbody>
+</table>
+</section><section id="why-bother" class="slide level2" data-background="https://oneroomwithaview.files.wordpress.com/2014/07/holy-grail-5.jpg">
+<h2>Why bother?</h2>
+<p>How many of us search for just one word topics? We can use tf-idf to narrow down documents that are likely matches to our search term but we need to check tf-idf for our multi-word term.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="CoreSlides_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="CoreSlides_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: '1920',
+        height: '1080',
+        // Factor of the display size that should remain empty around the content
+        margin: '0.05',
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
