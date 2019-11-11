@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Using R to explore outpatient trajectories from linked healthcare data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Fiona Grimm, The Health Foundation NHS-R conference 2019  @fiona_grimm @HealthFdn" />
+    <link href="libs/remark-css/hygge.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Using R to explore outpatient trajectories<br>from linked healthcare data
+### Fiona Grimm, The Health Foundation<br>NHS-R conference 2019<br><br><span class="citation">@fiona_grimm</span> <span class="citation">@HealthFdn</span>
+### 2019/11/04
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Outpatient care redesign in the NHS Long Term Plan
+
+.pull-left[
+
+&lt;img src="FionaGrimm_NHSR_files/figure-html/unnamed-chunk-4-1.png" width="550px" style="display: block; margin: auto;" /&gt;
+]
+
+--
+  
+.pull-right[
+&lt;br&gt;
+"...over the next five years patients will be able to avoid up to a third of face-to-face outpatient visits..."
+
+&lt;br&gt;
+### Strategies to achieve this
+
+* Avoid referrals by supporting GPs
+
+* Replace face-to-face with virtual appointments
+* Fewer and/or more flexible follow-ups
+
+What will be the effect on demand and how long will it take?
+]
+
+---
+class: inverse, middle, center
+
+# How can operational research techniques&lt;br&gt;inform policy?
+
+---
+## Proof of concept: testing alternative models of diabetes outpatient care
+
+--
+
+.large[
+### The approach
+1. Primary care data (CPRD) linked to HES for a cohort of diabetes patients
+
+2. Characterise follow-up frequencies
+
+3. Create transition probability matrix
+]
+
+---
+
+.pull-left[
+
+### From patient-level follow up patterns..
+
+
+&lt;img src="FionaGrimm_NHSR_files/figure-html/unnamed-chunk-5-1.png" width="450px" style="display: block; margin: auto;" /&gt;
+
+]
+---
+
+
+.pull-left[
+
+### From patient-level follow up patterns..
+
+
+&lt;img src="FionaGrimm_NHSR_files/figure-html/unnamed-chunk-6-1.png" width="450px" style="display: block; margin: auto;" /&gt;
+]
+
+--
+.pull-right[
+### ..to time interval between follow-ups
+
+&lt;img src="FionaGrimm_NHSR_files/figure-html/unnamed-chunk-7-1.png" width="450px" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+.pull-left[
+
+### From patient-level follow up patterns..
+
+
+&lt;img src="FionaGrimm_NHSR_files/figure-html/unnamed-chunk-8-1.png" width="450px" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+### ..to time interval between follow-ups
+
+&lt;img src="FionaGrimm_NHSR_files/figure-html/unnamed-chunk-9-1.png" width="450px" style="display: block; margin: auto;" /&gt;
+ 
+]
+
+---
+
+.pull-left[
+
+### From patient-level follow up patterns..
+
+
+&lt;img src="FionaGrimm_NHSR_files/figure-html/unnamed-chunk-10-1.png" width="450px" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+### ..to time interval between follow-ups
+
+&lt;img src="FionaGrimm_NHSR_files/figure-html/unnamed-chunk-11-1.png" width="450px" style="display: block; margin: auto;" /&gt;
+ 
+]
+
+--
+.pull-right[
+<i class="fas  fa-arrow-right "></i> map to follow-up categories   
+<i class="fas  fa-arrow-right "></i> create transition probability matrix
+
+]
+
+---
+## Proof of concept: the impact of policy scenarios on diabetes outpatient care
+
+.large[
+
+### The approach
+1. Primary care data (CPRD) linked to HES for a cohort of diabetes patients
+
+2. Characterise follow-up frequencies
+
+3. Create transition probability matrix
+
+4. Model the overall volume of appointments    
+using stochastic analytical models (Markov chains) and/or simulations
+
+5. Test the effect of different scenarios  ]
+
+
+---
+class: inverse, center, bottom
+background-image: url(https://creativepool.com/files/candidate/portfolio/full/1118419.jpg)
+background-size: 40% 
+
+&lt;br&gt;
+&lt;br&gt;
+# some great #rstats tools that helped with this analysis 
+
+---
+# {tidylog} expects nothing and gives great feedback
+
+
+
+
+
+```r
+library(tidyverse)
+
+summary &lt;- mtcars %&gt;% 
+  mutate(mpg_by_wt = mpg / wt) %&gt;% 
+  filter(cyl &gt; 4) %&gt;% 
+  select(mpg_by_wt, cyl)
+```
+
+---
+# {tidylog} expects nothing and gives great feedback
+
+
+
+
+
+```r
+library(tidyverse)
+*library(tidylog)
+
+summary &lt;- mtcars %&gt;% 
+  mutate(mpg_by_wt = mpg / wt) %&gt;% 
+  filter(cyl &gt; 4) %&gt;% 
+  select(mpg_by_wt, cyl)
+```
+
+```
+## mutate: new variable 'mpg_by_wt' with 32 unique values and 0% NA
+```
+
+```
+## filter: removed 11 rows (34%), 21 rows remaining
+```
+
+```
+## select: dropped 10 variables (mpg, disp, hp, drat, wt, …)
+```
+--
+&lt;br&gt;
+
+.pull-left[.content-box-green[
+Zero effort!   
+Saves time and helps avoid mistakes 
+]]
+
+.pull-right[.content-box-red[
+Beware when iterating:   
+printing console output might be slow]]
+
+---
+# Tools for filtering
+
+
+```r
+library(tidyverse)
+library(lubridate)
+library(nycflights13)
+```
+
+.pull-left[
+### By time period
+
+```r
+start &lt;- ymd('2013-01-01')
+end &lt;- start + days(2)
+
+my_interval &lt;- interval(start, end)
+
+flights %&gt;% 
+* filter(time_hour %within% my_interval)
+```
+]
+
+--
+
+.pull-right[
+### By another table
+
+```r
+top5_carries &lt;- flights %&gt;% 
+  group_by(carrier) %&gt;% 
+  count() %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  head()
+
+flights %&gt;% 
+* semi_join(top5_carries, by = 'carrier')
+```
+]
+---
+
+# Tools for summarising 
+
+.pull-left[
+### Cross-tabs with {janitor}
+
+```r
+library(janitor)
+
+mtcars %&gt;% 
+* tabyl(gear, cyl) %&gt;%
+  adorn_percentages() %&gt;% 
+  adorn_pct_formatting() %&gt;% 
+  adorn_rounding() %&gt;% 
+  adorn_title()
+```
+
+```
+##         cyl            
+##  gear     4     6     8
+##     3  6.7% 13.3% 80.0%
+##     4 66.7% 33.3%  0.0%
+##     5 40.0% 20.0% 40.0%
+```
+]
+
+--
+
+.pull-right[
+### Baseline characteristics with {tableone}
+
+```r
+library(tableone)
+
+CreateTableOne(data = iris, 
+               vars = c('Sepal.Length', 
+                        'Sepal.Width', 
+                        'Species'))
+```
+
+```
+##                           
+##                            Overall     
+##   n                         150        
+##   Sepal.Length (mean (SD)) 5.84 (0.83) 
+##   Sepal.Width (mean (SD))  3.06 (0.44) 
+##   Species (%)                          
+##      setosa                  50 (33.3) 
+##      versicolor              50 (33.3) 
+##      virginica               50 (33.3)
+```
+]
+---
+
+.pull-left[
+# Acknowledgements
+
+### Project team    
+* .bold[Meetali Kakad], University of Oslo   
+* Martin Utley, UCL Clinical Operations Research Unit   
+* Sarah Deeny, Health Foundation
+
+### Funding
+* The Health Foundation
+* Research Council of Norway
+
+### Clinical input   
+* Sarita Naik, Consultant Diabetologist, UCLH    
+* Ali Chakera, Consultant Diabetologist, Brighton and Sussex University Hospital   
+]
+
+.pull-right[
+# Get in touch
+.red[@fiona_grimm]
+
+.red[@tali_md]
+
+# Find our R code on GitHub
+.red[hfanalyticslab.github.io]
+![](FionaGrimm_NHSR_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

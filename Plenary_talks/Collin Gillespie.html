@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>How to win an AI Hackathon</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Colin Gillespie (@csgillespie)" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="css/style1.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# How to win an AI Hackathon
+## Without using AI
+### Colin Gillespie (<a href="https://twitter.com/csgillespie">@csgillespie</a>)
+
+---
+
+
+
+
+layout: true
+background-image: url(graphics/leakage.png)
+background-size: contain
+class: left, top, inverse
+---
+
+---
+
+layout: true
+background-image: url(assets/title-jr-white-logo.png)
+background-size: cover
+class: right, middle, inverse
+&lt;div class="jr-header-inverse"&gt; &lt;img class="logo" src="assets/header-jr-white-logo.png"/&gt; &lt;span class="social"&gt; &lt;table&gt;&lt;tr&gt; &lt;td&gt; &lt;img src="assets/header-twitter.gif"/&gt; &lt;/td&gt; &lt;td&gt;@jumping_uk&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;/span&gt; &lt;/div&gt;
+&lt;div class="jr-footer-inverse"&gt; &lt;span&gt;&amp;copy; 2019 Jumping Rivers (jumpingrivers.com) &lt;/span&gt; &lt;div&gt; jumpingrivers.com/t/2019-nhsr &lt;/div&gt; &lt;/div&gt;
+---
+
+# Northumbrian Water
+# Leakage Hack 2018
+
+---
+
+# Two days of background 
+# Two hack days 
+# Ten teams
+
+---
+
+# Data on Azure
+
+---
+
+# Goal: reduce leaks by 20%
+
+---
+
+layout: true
+background-image: url(graphics/bigdata-low.jpg)
+background-size: contain
+class: left, top
+---
+
+
+# Lots of data!!!
+
+  * Spatial
+  
+  * Time series
+  
+  * Estimates
+
+---
+
+### Historical data
+
+  * Reported Leaks!
+
+--
+
+  * Flow rates
+
+--
+
+  * Usage
+
+--
+
+  * Leakage
+  
+---
+
+### Infrastructure data
+
+  * Pipe type
+  
+  * Pipe location
+  
+  * Pipe size
+
+---
+
+### Location data
+
+  * Social
+  
+  * Business
+  
+---
+
+### Other
+
+  * Weather 
+  
+  * Bits and bobs
+
+---
+
+layout: true
+background-image: url(assets/title-jr-white-logo.png)
+background-size: cover
+class: left, top, inverse
+&lt;div class="jr-header-inverse"&gt; &lt;img class="logo" src="assets/header-jr-white-logo.png"/&gt; &lt;span class="social"&gt; &lt;table&gt;&lt;tr&gt; &lt;td&gt; &lt;img src="assets/header-twitter.gif"/&gt; &lt;/td&gt; &lt;td&gt;@jumping_uk&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;/span&gt; &lt;/div&gt;
+&lt;div class="jr-footer-inverse"&gt; &lt;span&gt;&amp;copy; 2019 Jumping Rivers (jumpingrivers.com) &lt;/span&gt; &lt;div&gt; jumpingrivers.com/t/2019-nhsr &lt;/div&gt; &lt;/div&gt;
+---
+
+# Problem set-up?
+
+  * Classic ML / Data science
+
+--
+
+  * Previous results
+  
+  * Predict the future
+
+---
+
+layout: true
+background-image: url(graphics/computer-small-low.jpg)
+background-size: contain
+class: left, top
+---
+
+# Me
+
+---
+
+layout: true
+background-image: url(graphics/clipboard-robot.jpg)
+background-size: contain
+class: left, top
+---
+
+# Seb
+
+(approximate likeness)
+
+---
+
+### He asked questions
+
+--
+
+### All of the 1st day!
+
+---
+
+layout: true
+background-image: url(assets/title-jr-white-logo.png)
+background-size: cover
+class: right, middle, inverse
+&lt;div class="jr-header-inverse"&gt; &lt;img class="logo" src="assets/header-jr-white-logo.png"/&gt; &lt;span class="social"&gt; &lt;table&gt;&lt;tr&gt; &lt;td&gt; &lt;img src="assets/header-twitter.gif"/&gt; &lt;/td&gt; &lt;td&gt;@jumping_uk&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;/span&gt; &lt;/div&gt;
+&lt;div class="jr-footer-inverse"&gt; &lt;span&gt;&amp;copy; 2019 Jumping Rivers (jumpingrivers.com) &lt;/span&gt; &lt;div&gt; jumpingrivers.com/t/2019-nhsr &lt;/div&gt; &lt;/div&gt;
+---
+
+## Remember: reduce leaks by 20%
+
+---
+
+# Why?
+
+---
+
+# Seems like a silly question?
+
+---
+
+# Answer: They get charged
+
+--
+
+# A lot
+
+---
+
+# ~~Reduce leaks by 20%~~
+
+--
+
+# Reduce the amount lost due to leakage
+
+---
+
+layout: true
+background-image: url(assets/title-jr-white-logo.png)
+background-size: cover
+class: left, top, inverse
+&lt;div class="jr-header-inverse"&gt; &lt;img class="logo" src="assets/header-jr-white-logo.png"/&gt; &lt;span class="social"&gt; &lt;table&gt;&lt;tr&gt; &lt;td&gt; &lt;img src="assets/header-twitter.gif"/&gt; &lt;/td&gt; &lt;td&gt;@jumping_uk&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;/span&gt; &lt;/div&gt;
+&lt;div class="jr-footer-inverse"&gt; &lt;span&gt;&amp;copy; 2019 Jumping Rivers (jumpingrivers.com) &lt;/span&gt; &lt;div&gt; jumpingrivers.com/t/2019-nhsr &lt;/div&gt; &lt;/div&gt;
+---
+
+### How do you estimate leakage?
+
+--
+
+  * Per DMA
+
+--
+
+  * Minimum flow rate
+  
+--
+
+  * Not the most precise measurement?
+  
+---
+
+### What do you need to fix leaks?
+
+--
+
+  * An engineer
+  
+--
+
+  * And Data!
+  
+---
+
+### What data does an engineer need?
+
+--
+
+  * Flow rate
+  
+  * Pipe type
+  
+  * Historical leakage
+  
+  * Weather, traffic, crime, ...
+
+--
+
+  * Takes ~two hours per day to get this information
+
+---
+
+# Data is hard
+
+---
+
+
+layout: true
+class: left, top, inverse
+&lt;div class="jr-header-inverse"&gt; &lt;img class="logo" src="assets/header-jr-white-logo.png"/&gt; &lt;span class="social"&gt; &lt;table&gt;&lt;tr&gt; &lt;td&gt; &lt;img src="assets/header-twitter.gif"/&gt; &lt;/td&gt; &lt;td&gt;@jumping_uk&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;/span&gt; &lt;/div&gt;
+&lt;div class="jr-footer-inverse"&gt; &lt;span&gt;&amp;copy; 2019 Jumping Rivers (jumpingrivers.com) &lt;/span&gt; &lt;div&gt; jumpingrivers.com/t/2019-nhsr &lt;/div&gt; &lt;/div&gt;
+---
+
+# Even in the 24th Century
+
+&lt;iframe width="924" height="519" src="https://www.youtube-nocookie.com/embed/A7B_ZWQFsYI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+---
+
+### Solution: Reduce engineer time!
+
+  * Easy
+  
+  * Do-able
+
+---
+
+layout: true
+background-image: url(graphics/a-team.jpg)
+background-size: contain
+class: left, top
+---
+
+
+# An app in 1/2 a day?
+
+---
+
+layout: true
+background-image: url(assets/title-jr-white-logo.png)
+background-size: cover
+class: left, top, inverse
+&lt;div class="jr-header-inverse"&gt; &lt;img class="logo" src="assets/header-jr-white-logo.png"/&gt; &lt;span class="social"&gt; &lt;table&gt;&lt;tr&gt; &lt;td&gt; &lt;img src="assets/header-twitter.gif"/&gt; &lt;/td&gt; &lt;td&gt;@jumping_uk&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;/span&gt; &lt;/div&gt;
+&lt;div class="jr-footer-inverse"&gt; &lt;span&gt;&amp;copy; 2019 Jumping Rivers (jumpingrivers.com) &lt;/span&gt; &lt;div&gt; jumpingrivers.com/t/2019-nhsr &lt;/div&gt; &lt;/div&gt;
+---
+
+# Decide what to "make" 
+
+--
+
+# Decide what to bluff
+
+---
+
+# Decide what is obvious
+
+---
+
+# We can demo a single DMA
+
+--
+
+# Do we need more?
+
+---
+
+# We can display pipe location &amp; type
+
+--
+
+# Pipe size is "obvious"
+
+---
+
+layout: true
+background-image: url(graphics/screen1.png)
+background-size: contain
+class: left, top, inverse
+&lt;div class="jr-header-inverse"&gt; &lt;img class="logo" src="assets/header-jr-white-logo.png"/&gt; &lt;span class="social"&gt; &lt;table&gt;&lt;tr&gt; &lt;td&gt; &lt;img src="assets/header-twitter.gif"/&gt; &lt;/td&gt; &lt;td&gt;@jumping_uk&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;/span&gt; &lt;/div&gt;
+&lt;div class="jr-footer-inverse"&gt; &lt;span&gt;&amp;copy; 2019 Jumping Rivers (jumpingrivers.com) &lt;/span&gt; &lt;div&gt; jumpingrivers.com/t/2019-nhsr &lt;/div&gt; &lt;/div&gt;
+---
+
+# __dplyr__ &amp; __DT__
+
+---
+
+layout: true
+background-image: url(graphics/screen2.png)
+background-size: contain
+class: left, top, inverse
+&lt;div class="jr-header-inverse"&gt; &lt;img class="logo" src="assets/header-jr-white-logo.png"/&gt; &lt;span class="social"&gt; &lt;table&gt;&lt;tr&gt; &lt;td&gt; &lt;img src="assets/header-twitter.gif"/&gt; &lt;/td&gt; &lt;td&gt;@jumping_uk&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;/span&gt; &lt;/div&gt;
+&lt;div class="jr-footer-inverse"&gt; &lt;span&gt;&amp;copy; 2019 Jumping Rivers (jumpingrivers.com) &lt;/span&gt; &lt;div&gt; jumpingrivers.com/t/2019-nhsr &lt;/div&gt; &lt;/div&gt;
+---
+
+# __plotly__ &amp;  __ggplot2__
+
+---
+
+layout: true
+background-image: url(graphics/screen3.png)
+background-size: contain
+class: left, top
+&lt;div class="jr-header-inverse"&gt; &lt;img class="logo" src="assets/header-jr-white-logo.png"/&gt; &lt;span class="social"&gt; &lt;table&gt;&lt;tr&gt; &lt;td&gt; &lt;img src="assets/header-twitter.gif"/&gt; &lt;/td&gt; &lt;td&gt;@jumping_uk&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;/span&gt; &lt;/div&gt;
+&lt;div class="jr-footer-inverse"&gt; &lt;span&gt;&amp;copy; 2019 Jumping Rivers (jumpingrivers.com) &lt;/span&gt; &lt;div&gt; jumpingrivers.com/t/2019-nhsr &lt;/div&gt; &lt;/div&gt;
+---
+
+# __leaflet__ &amp; __Javascript__
+
+--
+
+__Python__, __Dokku__, __Docker__, __Traefik__ for deployment
+
+---
+
+layout: true
+background-image: url(graphics/nwl-2019.jpg)
+background-size: contain
+class: left, top
+---
+
+# Oh, we won this year as well
+
+---
+
+layout: true
+background-image: url(graphics/waterhub.jpg)
+background-size: contain
+class: left, top
+---
+
+# And this
+
+---
+
+layout: true
+background-image: url(assets/title-jr-white-logo.png)
+background-size: cover
+class: left, top, inverse
+&lt;div class="jr-header-inverse"&gt; &lt;img class="logo" src="assets/header-jr-white-logo.png"/&gt; &lt;span class="social"&gt; &lt;table&gt;&lt;tr&gt; &lt;td&gt; &lt;img src="assets/header-twitter.gif"/&gt; &lt;/td&gt; &lt;td&gt;@jumping_uk&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;/span&gt; &lt;/div&gt;
+&lt;div class="jr-footer-inverse"&gt; &lt;span&gt;&amp;copy; 2019 Jumping Rivers (jumpingrivers.com) &lt;/span&gt; &lt;div&gt; jumpingrivers.com/t/2019-nhsr &lt;/div&gt; &lt;/div&gt;
+---
+
+### Summary
+
+  * Think about your problem
+  
+  * Don't jump in with both feet
+
+--
+
+  * Don't send me to a Hackathon without others (I lost)
+
+--
+
+  * Questions?
+  
+    * Drop by our booth for info on all things R &amp; Python
+
+
+
+
+
+&lt;!-- # Reality --&gt;
+
+
+&lt;!-- &lt;iframe width="840" height="472" src="https://www.youtube.com/embed/PtXtIivRRKQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt; --&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
