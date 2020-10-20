@@ -81,6 +81,8 @@
 
 - **Zoë Turner** - Senior Information Analyst, *Nottinghamshire Healthcare NHS Foundation Trust*
 
+- [Presentation](https://github.com/Lextuga007/Presentations/blob/master/MortalityR.pdf)
+
 ### Using R to support Front End Staff
 
 - **Lori Edwards Suarez** - Junior Data Analyst, *Nottinghamshire Healthcare NHS Trust*
