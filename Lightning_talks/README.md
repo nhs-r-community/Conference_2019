@@ -36,6 +36,8 @@
 
 - **Dominic Rowney** - Principal Information Analyst, *NHS NECS*
 
+- [Presentation](https://github.com/AZharinova/Conference_2019/blob/master/Lightning_talks/Dominic%20Romney.pptx)
+
 ### Age Standardisation of HES Data
 
 - **Duncan Cooper** - Programme Analyst, *NHS West Yorkshire and Harrogate Health and Care Partnership*
@@ -44,9 +46,13 @@
 
 - **Tom Jemmett** - Senior Healthcare Analyst, *The Strategy Unit*
 
+- [Presentation](https://github.com/AZharinova/Conference_2019/blob/master/Lightning_talks/Tom%20Jemmett.pptx)
+
 ### R in 80 days
 
 - **Neil Pettinger** - Information Training Consultant, *Kurtosis*
+
+- [Presentation](https://github.com/AZharinova/Conference_2019/blob/master/Lightning_talks/Neil%20Pettinger.pptx)
 
 ### Using Machine Learning to predict patient choice in a service reconfiguration
 
@@ -56,12 +62,16 @@
 
 - **Fiona Grimm** - Senior Data Analyst, *The Health Foundation*
 
+- [Presentation](https://github.com/AZharinova/Conference_2019/blob/master/Lightning_talks/Fiona%20Grimm.html)
+
 
 # Lightning Talks #3 (Tuesday AM)
 
 ### Health policy model with R
 
 - **Iryna Schlackow** - Senior Researcher, *University of Oxford*
+
+- [Presentation](https://github.com/AZharinova/Conference_2019/blob/master/Lightning_talks/Iryna%20Shlakow.pdf)
 
 ### Using R as a civil servant - applications of the leaflet package
 
@@ -71,19 +81,23 @@
 
 - **Zoë Turner** - Senior Information Analyst, *Nottinghamshire Healthcare NHS Foundation Trust*
 
-- [Presentation](https://github.com/Lextuga007/Presentations/blob/master/MortalityR.pdf)
-
 ### Using R to support Front End Staff
 
 - **Lori Edwards Suarez** - Junior Data Analyst, *Nottinghamshire Healthcare NHS Trust*
+
+- [Presentation](https://github.com/AZharinova/Conference_2019/blob/master/Lightning_talks/Lori%20Edwards%20Suarez.pptx)
 
 ### Experience of using R to develop a forecasting methodology for daily A&E attendances
 
 - **Andrew McCann** - Lead Data Scientist, *BI, Midlands and Lancashire Commissioning Support Unit*
 
+- [Presentation](https://github.com/AZharinova/Conference_2019/blob/master/Lightning_talks/Andy%20McCann.pptx)
+
 ### Developing a Diabetes Indicator Document through RMarkdown
 
 - **Victor Yu** - Healthcare Analyst, *The Strategy Unit*
+
+- [Presentation](https://github.com/AZharinova/Conference_2019/blob/master/Lightning_talks/Victor%20Yu.pptx)
 
 ### Using GIT for code sharing
 
@@ -95,6 +109,8 @@
 ### Using Supervised ML to augment dashboarding
 
 - **Gary Hutson** - Head of Solutions and AI, *Draper and Dash Ltd*
+
+- [Presentation](https://github.com/AZharinova/Conference_2019/blob/master/Lightning_talks/Gary%20Hutson.pptx)
 
 ### Experiences from a real-world prediction-modelling project
 
@@ -108,11 +124,17 @@
 
 - **Andrew Evans** - Senior Officer, *Public Health Knowledge Evidence and Governance*
 
+- [Presentation](https://github.com/AZharinova/Conference_2019/blob/master/Lightning_talks/Andy%20Evans.pptx)
+
 ### Clinicians, big data, & digital research: War stories from GOSH’s Digital Research Environment
 
 - **Richard Issitt** - Clinical Perfusionist, *Clinical Lead for the Digital Research*
 - **Ben Margetts** - Data scientist, *The Great Ormond Street Hospital Digital Research Environment, (GOSH)*
 
+- [Presentation](https://github.com/AZharinova/Conference_2019/blob/master/Lightning_talks/Richard%20Issitt%20and%20Ben%20Margetts.pptx)
+
 ### Working smarter: using R to modernise infectious disease surveillance processes
 
 - **Lynsey Patterson** - Head of Health Protection Surveillance, *Public Health Agency (NI)*
+
+- [Presentation](https://github.com/AZharinova/Conference_2019/blob/master/Lightning_talks/Lynsey%20Patterson.ppt)
